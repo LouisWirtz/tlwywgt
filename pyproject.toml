@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "tlwywgt"
+version = "0.1.0"
+description = ""
+authors = ["LouisWirtz <65605369+LouisWirtz@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.75.0"
+uvicorn = "^0.17.6"
+pydentic = "^0.0.1-alpha.3"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
