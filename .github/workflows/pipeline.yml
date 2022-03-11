@@ -24,8 +24,12 @@ jobs:
         source $HOME/.poetry/env
         poetry install
         
-    - name: style
-      run: |
-        poetry run flake8 app
-        poetry run mypy -p app
+  style:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: flake8
+        run: poetry run flake8 app
+      - name: mypy
+        run: poetry run mypy -p app
         
