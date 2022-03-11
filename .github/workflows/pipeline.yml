@@ -9,7 +9,7 @@ on:
   
 
 jobs:
-  build:
+  style:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,13 +23,7 @@ jobs:
         curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
         source $HOME/.poetry/env
         poetry install
-        
-  style:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: flake8
-        run: poetry run flake8 app
-      - name: mypy
-        run: poetry run mypy -p app
-        
+    - name: flake8
+      run: poetry run flake8 app
+    - name: mypy
+      run: poetr run mypy -p app
