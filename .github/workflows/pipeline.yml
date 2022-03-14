@@ -24,4 +24,4 @@ jobs:
         source $HOME/.poetry/env
         poetry install
         poetry run flake8 app
-        poetr run mypy -p app
+        poetry run mypy -p app
