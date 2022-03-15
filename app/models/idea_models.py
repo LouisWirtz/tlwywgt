@@ -1,16 +1,16 @@
 """Model for ideas."""
 import datetime
 
-from pydantic import BaseModel, Field
+from pydantic import Field
+
+from app.models import commons
 
 max_title_length = 50
 
 
-class IdeaResponse(BaseModel):
+class IdeaResponse(commons.SelfRef):
     """Describes the response for one idea."""
 
-    identity: int
     title: str = Field(..., max_length=max_title_length)
     date: datetime.datetime
     description: str
-    # TODO: SexyFrosch.png
