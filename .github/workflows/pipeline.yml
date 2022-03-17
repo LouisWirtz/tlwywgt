@@ -62,7 +62,7 @@ jobs:
       - name: Docker load
         run: |
           docker load < artifacts/docker-image.tar
-          docker run tlwywgt:$GITHUB_SHA flake8 app
+          docker run tlwywgt:$GITHUB_SHA python flake8 app
           
 
 
