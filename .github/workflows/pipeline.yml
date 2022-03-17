@@ -32,6 +32,36 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: docker build
-      run: docker build .
+      run: |
+        docker build -t tlwywgt:$GITHUB_SHA
+        mkdir artifacts
+        docker save tlwywgt:$GITHUB_SHA > artifacts/docker-image.tar
+
+    - name: Temporarily save Docker image
+      uses: actions/upload-artifact@v2
+      with:
+        name: docker-artifact
+        path: artifacts
+        retention-days: 1
+
+
+  docker-deploy:
+    name: Deploy to Docker Hub
+    runs-on: ubuntu-latest
+    needs: docker-build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Retrieve saved Docker image
+        uses: actions/download-artifact@v2
+        with:
+          name: docker-artifact
+          path: artifacts
+
+      - name: Docker load
+        run: |
+          docker load < artifacts/docker-image.tar
+          
 
 
