@@ -14,9 +14,5 @@ ENV POETRY_VIRTUALENVS_CREATE=false
 COPY ./pyproject.toml ${WORK_DIR}/
 COPY ./poetry.lock ${WORK_DIR}/
 RUN poetry install --no-root
-
-FROM python:3.10-slim
-COPY --from=build-env /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
-ENV PATH="${PATH}:/usr/local/lib/python3.10/site-packages"
 COPY ./app ${WORK_DIR}/app
 
