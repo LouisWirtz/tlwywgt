@@ -7,3 +7,6 @@ RUN poetry config virtualenvs.create false
 COPY ./pyproject.toml ${WORK_DIR}/
 COPY ./poetry.lock ${WORK_DIR}/
 RUN poetry install --no-dev --no-root
+
+COPY ./app ${WORK_DIR}/
+
