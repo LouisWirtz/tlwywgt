@@ -33,7 +33,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: docker-build
       run: |
-        docker build -t tlwywgt:$GITHUB_SHA
+        docker build -t tlwywgt:$GITHUB_SHA .
         mkdir artifacts
         docker save tlwywgt:$GITHUB_SHA > artifacts/docker-image.tar
 
