@@ -9,6 +9,6 @@ COPY ./poetry.lock ${WORK_DIR}/
 RUN poetry install --no-dev --no-root
 
 FROM python:3.10-slim
-COPY --from=build-env /usr/local/lib/python3.7/site-packages /usr/local/lib/python3.7/site-packages
+COPY --from=build-env /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
 COPY ./app ${WORK_DIR}/
 
