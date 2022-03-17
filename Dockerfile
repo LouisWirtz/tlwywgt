@@ -16,7 +16,7 @@ COPY ./poetry.lock ${WORK_DIR}
 RUN poetry install --no-root
 
 COPY ./app ${WORK_DIR}/app
-COPY ./setup.cfg . ${WORK_DIR}
+COPY ./setup.cfg ${WORK_DIR}
 
 
 
