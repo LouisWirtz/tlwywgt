@@ -25,3 +25,13 @@ jobs:
         poetry install
         poetry run flake8 app
         poetry run mypy -p app
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: docker build
+      run: docker build .
+
+
