@@ -11,8 +11,12 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/inst
 
 ENV PATH="${PATH}:/root/.poetry/bin"
 ENV POETRY_VIRTUALENVS_CREATE=false
-COPY ./pyproject.toml ${WORK_DIR}/
-COPY ./poetry.lock ${WORK_DIR}/
+COPY ./pyproject.toml ${WORK_DIR}
+COPY ./poetry.lock ${WORK_DIR}
 RUN poetry install --no-root
+
 COPY ./app ${WORK_DIR}/app
+COPY ./setup.cfg . ${WORK_DIR}
+
+
 
