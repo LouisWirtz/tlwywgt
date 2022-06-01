@@ -25,3 +25,44 @@ jobs:
         poetry install
         poetry run flake8 app
         poetry run mypy -p app
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: docker-build
+      run: |
+        docker build -t tlwywgt:$GITHUB_SHA .
+        mkdir artifacts
+        docker save tlwywgt:$GITHUB_SHA > artifacts/docker-image.tar
+
+    - name: Temporarily save Docker image
+      uses: actions/upload-artifact@v2
+      with:
+        name: docker-artifact
+        path: artifacts
+        retention-days: 1
+
+
+  docker-style:
+    name: run style checks
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Retrieve saved Docker image
+        uses: actions/download-artifact@v2
+        with:
+          name: docker-artifact
+          path: artifacts
+
+      - name: Docker load
+        run: |
+          docker load < artifacts/docker-image.tar
+          docker run tlwywgt:$GITHUB_SHA poetry run flake8 app
+          
+
+
